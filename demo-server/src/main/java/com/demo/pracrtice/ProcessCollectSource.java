@@ -48,6 +48,7 @@ class Chair {
         }
     }
 
+    @Override
     protected void finalize() {
         if (!gcrun) {
             gcrun = true;
