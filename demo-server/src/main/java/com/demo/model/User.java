@@ -14,6 +14,7 @@ public class User implements Serializable {
     private Long id;
     private String name;
     private Integer age;
+    private String password;
 
     public Long getId() {
         return id;
@@ -37,6 +38,14 @@ public class User implements Serializable {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
