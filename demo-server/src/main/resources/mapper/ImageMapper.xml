@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.ImageMapper">
+    <!--<select id="selectUser" parameterType="Integer" resultType="com.apexsoft.Entity.User">-->
+    <!--SELECT ID,NAME,AGE FROM "USER" WHERE id= ${bid}-->
+    <!--</select>-->
+    <insert id="insert" parameterType="com.demo.model.Image">
+        INSERT INTO image(id,name,url) VALUES(#{id},#{name},#{url})
+    </insert>
+    <!--<delete id="delete" parameterType="int">-->
+    <!--DELETE FROM "USER" WHERE id=#{id}-->
+    <!--</delete>-->
+
+    <!--<update id="update" parameterType="com.apexsoft.Entity.User">-->
+    <!--UPDATE "USER" SET name=#{name},age=#{age} WHERE id=#{id}-->
+    <!--</update>-->
+
+    <select id="findAll" resultType="com.demo.model.Image">
+        SELECT * FROM "image"
+    </select>
+</mapper>

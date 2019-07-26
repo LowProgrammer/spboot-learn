@@ -1,0 +1,56 @@
+server:
+  port: 8088
+  tomcat:
+    uri-encoding: UTF-8
+grpc:
+  server:
+    port: 9876
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+
+    #初始化大小。最小，最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    #配置获取连接等待超时的时间
+    maxWait: 60000
+    #配制间隔多久进行一次检测，检测需要关闭的空闲连接，单位毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    #配置一个连接在池中的最小生存时间，单位毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 1 from dual
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    #打开PSCache，指定每个连接上PSCache的大小
+    poolPreparedSrarement: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    #配置监控统计拦截的filters，去掉监控界面的sql将无法统计，wall用于防火墙
+    filters: stat,log4j #wall
+    #打开mergesql功能，慢sql记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis:5000
+    #合并多个druidDataSource的监控数据
+    #userGlobalDataSourceStat: true
+  redis:
+    host: 192.168.189.123
+    port: 6379
+  messages:
+    encoding: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+#    redis:
+#      host: 192.168.189.123
+#      port: 6379
+mybatis:
+  type-aliases-package: com.demo.model
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+logging:
+  level:
+    com:
+      demo:
+        mapper: debug

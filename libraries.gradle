@@ -1,0 +1,12 @@
+ext {
+    //
+    //springBootVeriosn "2.1.6.RELEASE"
+    
+    
+    library = [
+            
+            start_web: "org.springframework.boot:spring-boot-starter-web" ,
+            
+            cloud_security: "org.springframework.cloud:spring-cloud-starter-security"
+    ]
+}

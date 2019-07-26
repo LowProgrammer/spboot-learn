@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.demo.grpc";
+
+option java_outer_classname = "DemoProto";
+
+//请求消息
+message CommonRequest {
+    string header = 3;
+    string body = 4;
+}
+//响应消息
+message CommonResponse {
+    int32 code = 1;
+    string note = 2;
+}
+//流式响应消息
+message StreamResponse {
+    int32 code = 1;
+    string message = 2;
+    int32 count = 3;
+    repeated CommonResponse record = 4;
+}
+service Simple {
+    rpc Hello (CommonRequest) returns (CommonResponse) {
+    }
+
+    rpc StreamServerHello (CommonRequest) returns (stream StreamResponse) {
+    }
+}

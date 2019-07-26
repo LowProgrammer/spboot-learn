@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.6'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'idea'
+}
+apply plugin: "com.google.protobuf"
+
+group 'com.example.demo-grpc'
+version '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+dependencies {
+    compile "com.google.protobuf:protobuf-java:3.6.1"
+    compile "io.grpc:grpc-netty:1.12.1"
+    compile "io.grpc:grpc-protobuf:1.12.1"
+    compile "io.grpc:grpc-stub:1.12.1"
+}
+
+protobuf {
+    protoc {
+        // The artifact spec for the Protobuf Compiler
+        artifact = 'com.google.protobuf:protoc:3.6.1'
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.12.1'
+        }
+    }
+    generateProtoTasks {
+        ofSourceSet('main')*.plugins {
+
+            grpc {}
+        }
+    }
+}
+
+
