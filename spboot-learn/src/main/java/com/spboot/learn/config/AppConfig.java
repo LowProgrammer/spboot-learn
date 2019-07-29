@@ -1,8 +1,10 @@
 package com.spboot.learn.config;
 
+import com.spboot.learn.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 /**
  * @author feifei
@@ -12,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @Created by ChenS
  */
 @Configuration
-@ComponentScan("com.spboot.learn.*")
+@ComponentScan(value = "com.spboot.learn.*" ,excludeFilters = {@ComponentScan.Filter(classes = Service.class)})
 public class AppConfig {
 
 //    @Bean(name = "user")
