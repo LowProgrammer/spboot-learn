@@ -8,4 +8,5 @@ include 'demo-proto'
 include 'demo-server'
 include 'demo-client'
 include 'spboot-security'
+include 'spboot-learn'
 

@@ -32,16 +32,18 @@ public class UserRedis {
     public User get(String key) {
         Gson gson = new Gson();
         User user = null;
-        String json = redisTemplate.opsForValue().get(key);
-        System.out.println("get json=========" + json);
-        try {
-            if (json != null && !StringUtils.isEmpty(json)) {
-                user = gson.fromJson(json, User.class);
+        if(redisTemplate.hasKey(key)) {
+            String json = redisTemplate.opsForValue().get(key);
+            System.out.println("get json=========" + json);
+            try {
+                if (json != null && !StringUtils.isEmpty(json)) {
+                    user = gson.fromJson(json, User.class);
+                }
+            } catch (NullPointerException no) {
+                no.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (NullPointerException no) {
-            no.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return user;
     }

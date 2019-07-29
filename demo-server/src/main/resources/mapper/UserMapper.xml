@@ -23,7 +23,7 @@
             </association>
         </collection>
     </resultMap>
-
+    <!--插入 更新 删除 查找-->
     <insert id="insert" parameterType="com.demo.model.User">
         INSERT INTO user(name,age,password) VALUES(#{name},#{age},#{password})
     </insert>
