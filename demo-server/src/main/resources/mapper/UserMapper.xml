@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.mapper.UserMapper">
+    <resultMap id="roles" type="com.demo.model.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="sex" property="sex"/>
+        <result column="createDate" property="cretedate"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <association property="departMent" column="duid" javaType="com.demo.model.DepartMent">
+            <id column="id" property="id"/>
+            <result column="d_name" property="name"/>
+            <result column="d_createdate" property="creteDate"/>
+        </association>
+        <collection property="userRoles" column="id" ofType="com.demo.model.UserRoles">
+            <id property="id" column="id"/>
+            <association property="roleId" column="roles_id" javaType="com.demo.model.Role">
+                <id property="id" column="id"/>
+                <result property="name" column="r_name"/>
+                <result property="createDate" column="r_createdate"/>
+            </association>
+        </collection>
+    </resultMap>
+
     <insert id="insert" parameterType="com.demo.model.User">
         INSERT INTO user(name,age,password) VALUES(#{name},#{age},#{password})
     </insert>
@@ -11,9 +34,20 @@
         delete from user where name=#{name}
     </delete>
     <select id="findAll" resultType="com.demo.model.User">
-        SELECT * FROM "user"
+        select * from department d,(
+            select * from user u left join user_role_id ur on u.id=ur.user_id inner join role r on ur.roles_id=r.id
+        )urs where d.id=urs.duid
+        <!--SELECT * FROM "user"-->
     </select>
-    <select id="select" parameterType="String" resultType="com.demo.model.User">
-        select * from user where name=#{name}
+    <sql id=""></sql>
+    <select id="select" parameterType="String" resultMap="roles">
+
+        select d.name as d_name,d.createdate as d_createdate,urs.*  from department d,(
+          select u.name ,u.age,u.email,u.createdate ,u.password,u.sex,r.name as r_name,r.createdate as r_createdate,u.duid
+          from user u left join user_role_id ur on u.id=ur.user_id
+                      inner join role r on ur.roles_id=r.id
+          where u.name=#{name}
+        )urs where d.id=urs.duid
+        <!--select * from user where name=#{name}-->
     </select>
 </mapper>

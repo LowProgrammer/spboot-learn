@@ -41,7 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private SecuritySettings settings;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-    @Autowired @Qualifier("dataSource")
+    @Autowired
+    //@Qualifier("dataSource")
     private DataSource dataSource;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

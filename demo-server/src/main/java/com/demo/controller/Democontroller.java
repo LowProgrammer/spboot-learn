@@ -17,7 +17,7 @@ import java.net.URLEncoder;
  * @Created by ChenS
  */
 @RestController
-public class Democoller {
+public class Democontroller {
 
     @Autowired
     private UserService userService;

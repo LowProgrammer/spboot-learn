@@ -1,7 +1,10 @@
 package com.demo.mapper;
 
 import com.demo.model.User;
+import com.demo.service.StringRedisService;
 import org.apache.ibatis.annotations.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,6 +18,7 @@ import java.util.List;
 @Mapper
 @Component
 public interface UserMapper {
+    //static final Logger logger = LoggerFactory.getLogger(UserMapper.class);
     void insert(User user);
 
     List<User> findAll();

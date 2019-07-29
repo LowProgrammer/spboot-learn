@@ -49,6 +49,10 @@ spring:
 mybatis:
   type-aliases-package: com.demo.model
   mapper-locations: classpath*:/mapper/*Mapper.xml
+  mybatis.config-location: classpath:mybatis/mybatis-config.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
 logging:
   level:
     com:

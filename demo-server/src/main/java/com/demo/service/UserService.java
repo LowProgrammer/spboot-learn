@@ -1,10 +1,16 @@
 package com.demo.service;
 
 import com.demo.mapper.UserMapper;
+import com.demo.model.Role;
 import com.demo.model.User;
 import com.demo.redis.UserRedis;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * @Classname UserService
@@ -14,6 +20,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -21,15 +28,30 @@ public class UserService {
     private static final String keyHead = "mysql:get:user:";
 
     public User findByName(String name) {
-        User user = userRedis.get(keyHead + name);
-        System.out.println("user redis:" + user.getName() + "===" + user.getAge());
-        if (user == null) {
-            user = userMapper.select(name);
-            System.out.println("user find mysql:" + user.getName() + "===" + user.getAge());
-            if (user != null) {
-                userRedis.add(keyHead + name, 30L, user);
+        logger.info(userMapper.select(name).toString());
+        User user = userMapper.select(name);
+        System.out.println("user find mysql:" + user.getName() + "===" + user.getAge()+user.getDepartMent().toString()
+                +"=="+user.getUserRoles().toArray().toString()
+        );
+        Set<Role> roles=user.getUserRoles();
+            Iterator<Role> it=roles.iterator();
+            while(it.hasNext()){
+                Role r=it.next();
+                System.out.println(r.getName()+"===="+r.getCreateDate());
             }
-        }
+
+        System.out.println(user.toString());
+//        User user = userRedis.get(keyHead + name);
+//        System.out.println("user redis:" + user.getName() + "===" + user.getAge());
+//        if (user == null) {
+//            user = userMapper.select(name);
+//            System.out.println("user find mysql:" + user.getName() + "===" + user.getAge()+user.getDepartMent().toString()
+//                    +"=="+user.getUserRoles().toArray().toString()
+//            );
+//            if (user != null) {
+//                userRedis.add(keyHead + name, 30L, user);
+//            }
+//        }
         return user;
     }
 

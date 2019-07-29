@@ -1,6 +1,9 @@
 package com.demo.model;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @Classname User
@@ -15,6 +18,11 @@ public class User implements Serializable {
     private String name;
     private Integer age;
     private String password;
+    private Date creteDate;
+    private Integer sex;
+    private String email;
+    private DepartMent departMent;
+    private Set<Role> userRoles=new HashSet<>();
 
     public Long getId() {
         return id;
@@ -48,8 +56,54 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public Date getCretedate() {
+        return creteDate;
+    }
+
+    public void setCretedate(Date cretedate) {
+        this.creteDate = cretedate;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public DepartMent getDepartMent() {
+        return departMent;
+    }
+
+    public void setDepartMent(DepartMent departMent) {
+        this.departMent = departMent;
+    }
+
+    public Set<Role> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<Role> userRoles) {
+        this.userRoles = userRoles;
+    }
+
     @Override
     public String toString() {
-        return "User{name:" + name + ",age:" + age + "}";
+        StringBuffer sb=new StringBuffer("role:{");
+        //Role[] role1=(Role[]) userRoles.toArray();
+//        for(Role role:role1){
+//            sb.append("{ name:"+role.getName()+",createDate:"+role.getCreateDate()+"},");
+//        }
+//        sb.append("}");
+        return "User{name:" + name + ",age:" + age + ",emaile:"+email+",sex:"+sex+",createDate:"+creteDate+",departMent:"+departMent.getName()+","+sb+"}";
     }
 }
