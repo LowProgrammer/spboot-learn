@@ -3,7 +3,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = 'demo'
+rootProject.name = 'demo-grpc'
 include 'demo-proto'
 include 'demo-server'
 include 'demo-client'
