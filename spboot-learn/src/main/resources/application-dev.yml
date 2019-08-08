@@ -1,9 +1,13 @@
 server:
-  port: 808
+  port: 8088
+
 spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/
-      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
 logging:
   level: debug
+
