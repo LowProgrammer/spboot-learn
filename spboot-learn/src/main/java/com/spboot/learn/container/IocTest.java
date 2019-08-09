@@ -48,5 +48,12 @@ public class IocTest {
 
         Dog dog=ctx.getBean(Dog.class);
         System.out.println(dog.getInitTime());
+
+
+
+
+
+
+
     }
 }
