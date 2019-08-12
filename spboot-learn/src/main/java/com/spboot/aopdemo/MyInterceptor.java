@@ -1,6 +1,4 @@
-package com.spboot.aop;
-
-import org.aopalliance.intercept.Invocation;
+package com.spboot.aopdemo;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -14,17 +12,17 @@ import java.lang.reflect.InvocationTargetException;
 public class MyInterceptor implements Interceptor {
     @Override
     public boolean before() {
-        System.out.println("before.......");
+        System.out.println("my before.......");
         return true;
     }
 
     @Override
     public void after() {
-        System.out.println("after ......");
+        System.out.println("my after ......");
     }
 
     @Override
-    public Object around(com.spboot.aop.Invocation invocation) throws InvocationTargetException, IllegalAccessException {
+    public Object around(com.spboot.aopdemo.Invocation invocation) throws InvocationTargetException, IllegalAccessException {
         System.out.println("around before .....");
         Object obj=invocation.proceed();
         System.out.println("around after ......");
