@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService=null;
 
@@ -26,8 +27,28 @@ public class UserController {
         user.setId(id);
         user.setUserName(userName);
         user.setNote(note);
+        //UserValidator userValidator=(UserValidator) userService;
         //user=null;
+        //if(userValidator.validate(user)){
+        //    userService.printUser(user);
+        //}
         userService.printUser(user);
+        return user;
+    }
+
+    @RequestMapping("/vp")
+    @ResponseBody
+    public User validateAndPrint(Long id,String userName,String note){
+        User user=new User();
+        user.setId(id);
+        user.setUserName(userName);
+        user.setNote(note);
+        UserValidator userValidator=(UserValidator) userService;
+        //user=null;
+        if(userValidator.validate(user)){
+            userService.printUser(user);
+        }
+        //userService.printUser(user);
         return user;
     }
 }

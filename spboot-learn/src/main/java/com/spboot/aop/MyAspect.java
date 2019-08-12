@@ -13,6 +13,8 @@ import org.aspectj.lang.annotation.*;
 @Aspect
 public class MyAspect {
 
+    @DeclareParents(value = "com.spboot.aop.UserValidateImpl",defaultImpl = UserValidateImpl.class)
+    public UserValidator userValidator;
 
     @Pointcut("execution(* com.spboot.aop.UserServiceImpl.printUser(..))")
     public void pointCut(){
@@ -29,13 +31,13 @@ public class MyAspect {
 
     }
 
-    //环绕通知
-    @Around("pointCut()")
-    public void around(ProceedingJoinPoint jp) throws Throwable {
-        System.out.println("around before ....");
-        jp.proceed();
-        System.out.println("around after ....");
-    }
+//    //环绕通知
+//    @Around("pointCut()")
+//    public void around(ProceedingJoinPoint jp) throws Throwable {
+//        System.out.println("around before ....");
+//        jp.proceed();
+//        System.out.println("around after ....");
+//    }
 
 
 
