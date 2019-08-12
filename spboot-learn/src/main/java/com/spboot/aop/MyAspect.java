@@ -1,5 +1,6 @@
 package com.spboot.aop;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 
 /**
@@ -27,6 +28,17 @@ public class MyAspect {
         System.out.println("after .....");
 
     }
+
+    //环绕通知
+    @Around("pointCut()")
+    public void around(ProceedingJoinPoint jp) throws Throwable {
+        System.out.println("around before ....");
+        jp.proceed();
+        System.out.println("around after ....");
+    }
+
+
+
 
     @AfterReturning("pointCut()")
     public void afterReturning(){
