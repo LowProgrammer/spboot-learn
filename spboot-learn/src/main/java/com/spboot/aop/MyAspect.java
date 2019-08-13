@@ -1,5 +1,7 @@
 package com.spboot.aop;
 
+import com.spboot.learn.model.User;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 
@@ -19,6 +21,12 @@ public class MyAspect {
     @Pointcut("execution(* com.spboot.aop.UserServiceImpl.printUser(..))")
     public void pointCut(){
 
+    }
+
+    @Before("pointCut() && args(user)")
+    public void beforeParam(JoinPoint point, User user){
+        Object[] args=point.getArgs();
+        System.out.println("before .....");
     }
     @Before("pointCut()")
     public void before(){
