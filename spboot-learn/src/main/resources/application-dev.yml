@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spboot?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/spboot_tmp?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: root
 #    tomcat:
@@ -13,13 +13,13 @@ spring:
 #      max-wait: 10000
 #      initial-size: 5
 
-logging:
- level:
-    root: debug
-    org:
-      sprinngframework: debug
-      org:
-        mybatis: debug
+#logging:
+# level:
+#    root: debug
+#    org:
+#      sprinngframework: debug
+#      org:
+#        mybatis: debug
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml
   type-aliases-package: com.spboot.db.pojo
