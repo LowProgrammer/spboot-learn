@@ -3,6 +3,7 @@ package com.spboot.db.controller;
 import com.spboot.db.pojo.User;
 import com.spboot.db.service.UserBatchService;
 import com.spboot.db.serviceImpl.DBUserServiceImpl;
+import com.spboot.db.serviceImpl.UserBatchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class dbController {
     @Autowired
     private DBUserServiceImpl userServiceImpl=null;
     @Autowired
-    private UserBatchService userBatchService=null;
+    private UserBatchServiceImpl userBatchService=null;
 
     @RequestMapping("/print")
     @ResponseBody
@@ -53,7 +54,7 @@ public class dbController {
 
     @RequestMapping("/insertUserList")
     @ResponseBody
-    public Map<String,Object> insertUsers(String userName1,String note1,String userName2,String note2){
+    public Map<String,Object> insertUser(String userName1,String note1,String userName2,String note2){
         User user1=new User();
         user1.setUsername(userName1);
         user1.setNote(note1);

@@ -19,18 +19,21 @@ import java.util.List;
  * @Date 2019/8/14 20:46
  * @Created by ChenS
  */
+
 @Service
 public class UserBatchServiceImpl implements UserBatchService {
 
     @Autowired
-    //@Qualifier("DBUserServiceImpl")
-    private DBUserServiceImpl DBuserService=null;
+    private DBUserServiceImpl userServiceImpl=null;
+
+
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
     public int insertUsers(List<User> userList) {
         int count=0;
         for (User user:userList) {
-            count+=DBuserService.insertUser(user);
+            System.out.println(user.getUsername()+user.getNote());
+            count+=userServiceImpl.insertUser(user);
         }
         return count;
     }

@@ -69,4 +69,9 @@ dependencies {
     //mysql
     compile 'org.springframework.boot:spring-boot-starter-jdbc'
     compile("mysql:mysql-connector-java:6.0.6")
+    
+    //redis
+    //compile 'org.springframework.boot:spring-boot-starter-data-redis'
+    
+    
 }

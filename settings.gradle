@@ -9,4 +9,5 @@ include 'demo-server'
 include 'demo-client'
 include 'spboot-security'
 include 'spboot-learn'
+include 'java-prac'
 
