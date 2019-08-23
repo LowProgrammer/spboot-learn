@@ -29,6 +29,11 @@ public class ShowMethods {
             if (args.length==1){
                 for (int i = 0; i < m.length; i++) {
                     System.out.println(m[i].toString());
+                    if(m[i].toString().contains("printStr")){
+                        PetCount petCount=new PetCount();
+                        PetCount p=(PetCount) c.newInstance();
+                        m[i].invoke(p,"124564121321651132");
+                    }
                 }
                 for (int i = 0; i < ctor.length; i++) {
                     System.out.println(ctor[i].toString());
@@ -48,6 +53,8 @@ public class ShowMethods {
             }
         }catch (ClassNotFoundException e){
             System.out.println("No such class:"+e);
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

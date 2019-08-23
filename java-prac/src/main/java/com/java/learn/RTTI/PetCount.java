@@ -87,4 +87,8 @@ public class PetCount {
             );
         }
     }
+
+    public void printStr(String val){
+        System.out.println(val);
+    }
 }
