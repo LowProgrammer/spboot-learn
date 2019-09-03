@@ -71,7 +71,9 @@ dependencies {
     compile("mysql:mysql-connector-java:6.0.6")
     
     //redis
-    //compile 'org.springframework.boot:spring-boot-starter-data-redis'
-    
-    
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
+    // https://mvnrepository.com/artifact/redis.clients/jedis
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+
+
 }
