@@ -19,19 +19,28 @@ spring:
 
     timeout: 1000ms
 
+  cache:
+    cache-names: redisCache
+    redis:
+      cache-null-values: true
+      key-prefix:
+      time-to-live: 0ms
+      use-key-prefix: true
+    type: redis
+
 #    tomcat:
 #      max-idle: 10
 #      max-active: 50
 #      max-wait: 10000
 #      initial-size: 5
 
-#logging:
-# level:
-#    root: debug
-#    org:
-#      sprinngframework: debug
-#      org:
-#        mybatis: debug
+logging:
+ level:
+    root: debug
+    org:
+      sprinngframework: debug
+      org:
+        mybatis: debug
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml
   type-aliases-package: com.spboot.db.pojo

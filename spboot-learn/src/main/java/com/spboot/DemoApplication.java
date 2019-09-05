@@ -6,6 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +33,8 @@ import javax.annotation.PostConstruct;
  * @Created by ChenS
  */
 @SpringBootApplication(scanBasePackages = {"com.spboot"})
-@MapperScan(basePackages = "com.spboot.db.*")
+@MapperScan(basePackages = "com.spboot.*")
+@EnableCaching
 public class DemoApplication {
 //    @Bean(name = "myaspect")
 //    public MyAspect initMyAspect(){

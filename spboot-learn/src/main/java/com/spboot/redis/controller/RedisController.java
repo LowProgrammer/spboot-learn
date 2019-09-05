@@ -1,5 +1,7 @@
 package com.spboot.redis.controller;
 
+import com.spboot.redis.pojo.User;
+import com.spboot.redis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisZSetCommands;
@@ -239,8 +241,8 @@ public class RedisController {
     @RequestMapping("/lua2")
     @ResponseBody
     public Map<String,Object> testLua2(String key1,String key2,String value1,String value2){
-        String lua="redis.call('set',KEYS[1],ARVG[1])\n" +
-                "redis.call('set',KEYS[2],ARVG[2])\n" +
+        String lua="redis.call('set',KEYS[1],ARGV[1])\n" +
+                "redis.call('set',KEYS[2],ARGV[2])\n" +
                 "local str1=redis.call('get',KEYS[1])\n" +
                 "local str2=redis.call('get',KEYS[2])\n" +
                 "if str1==str2 then\n" +
@@ -261,5 +263,56 @@ public class RedisController {
         Map<String,Object> map=new HashMap<>();
         map.put("success",result);
         return map;
+    }
+
+    @Autowired
+    private UserService userService=null;
+
+    @RequestMapping("/getUser")
+    @ResponseBody
+    public User getUser(Long id){
+        return userService.getUser(id);
+    }
+
+    @RequestMapping("/insertUser")
+    @ResponseBody
+    public User insertUser(String userName,String note){
+        User user=new User();
+        user.setUserName(userName);
+        user.setNote(note);
+        userService.insertUser(user);
+        return user;
+    }
+
+    @RequestMapping("/findUsers")
+    @ResponseBody
+    public List<User> findUsers(String userName,String note){
+        return userService.findUsers(userName,note);
+    }
+
+    @RequestMapping("/updateUserName")
+    @ResponseBody
+    public Map<String,Object> updateUserName(Long id,String userName){
+        User user=userService.updateUserName(id,userName);
+        boolean flag=user!=null;
+        String message=flag?"更新成功":"更新失败";
+        return resultMap(flag,message);
+    }
+
+    @RequestMapping("/deleteUser")
+    @ResponseBody
+    public Map<String,Object> deleteUser(Long id){
+        int result=userService.deleteUser(id);
+        boolean flag=result==1;
+        String message=flag?"更新成功":"更新失败";
+        return resultMap(flag,message);
+    }
+
+
+    private Map<String,Object> resultMap(boolean success,String message){
+        Map<String,Object> result=new HashMap<>();
+        result.put("success",success);
+        result.put("message",message);
+        return result;
     }
 }
