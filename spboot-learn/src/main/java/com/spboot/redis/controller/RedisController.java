@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -214,6 +216,50 @@ public class RedisController {
 
         Map<String,Object> map=new HashMap<>();
         map.put("success",true);
+        return map;
+    }
+
+    @RequestMapping("/lua")
+    @ResponseBody
+    public Map<String,Object> testLua(){
+        DefaultRedisScript<String> rs=new DefaultRedisScript<>();
+        rs.setScriptText("return 'Hello Redis'");
+
+        rs.setResultType(String.class);
+
+        RedisSerializer<String> stringRedisSerializer=redisTemplate.getStringSerializer();
+
+        String str= (String) redisTemplate.execute(rs,stringRedisSerializer,stringRedisSerializer,null);
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("success",str);
+        return map;
+    }
+
+    @RequestMapping("/lua2")
+    @ResponseBody
+    public Map<String,Object> testLua2(String key1,String key2,String value1,String value2){
+        String lua="redis.call('set',KEYS[1],ARVG[1])\n" +
+                "redis.call('set',KEYS[2],ARVG[2])\n" +
+                "local str1=redis.call('get',KEYS[1])\n" +
+                "local str2=redis.call('get',KEYS[2])\n" +
+                "if str1==str2 then\n" +
+                "return 1\n" +
+                "end\n" +
+                "return 0";
+        System.out.println(lua);
+        DefaultRedisScript<Long> rs=new DefaultRedisScript<>();
+        rs.setScriptText(lua);
+        rs.setResultType(Long.class);
+        RedisSerializer<String> serializer=redisTemplate.getStringSerializer();
+
+        List<String> keyList=new ArrayList<>();
+        keyList.add(key1);
+        keyList.add(key2);
+
+        Long result= (Long) redisTemplate.execute(rs,serializer,serializer,keyList,value1,value2);
+        Map<String,Object> map=new HashMap<>();
+        map.put("success",result);
         return map;
     }
 }
