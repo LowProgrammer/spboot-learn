@@ -1,0 +1,17 @@
+server:
+  port: 8088
+spring:
+  data:
+    mongodb:
+      authentication-database:
+      database: journal
+      field-naming-strategy:
+      grid-fs-database:
+      host: 10.100.2.124
+      password:
+      port: 27017
+      repositories:
+        type: auto
+      uri: mongodb://10.100.2.124/test
+      username:
+
